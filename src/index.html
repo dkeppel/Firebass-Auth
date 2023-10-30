@@ -45,4 +45,24 @@
     <script src="./src/firebase.js"></script>
     <script src="./src/scripts.js"></script>
     <script src="./src/components.js"></script>
+    <script src="./src/actions.js"></script>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault()
+            const formData = new FormData(e.target);
+            const email = formData.get('email')
+            const password = formData.get('password')
+            const name = formData.get('name')
+            signup(email, password, name)
+        });
+        //NOTE - Checks users logged in state and redirects to homepage.
+        firebaseApp.auth().onAuthStateChanged(user => {
+            if (user) { //Checks users login state. If user is logged in user object will be ture, otherwise will be false.
+                window.location.pathname = '/' //If user is logged in, redirected to root path.
+            }
+        });
+
+    </script>
+    </body>
 </html>
